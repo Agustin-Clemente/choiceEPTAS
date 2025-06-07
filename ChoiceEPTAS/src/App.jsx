@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react'; // <--- agrega useRef
 
 const App = () => {
   const [questions, setQuestions] = useState([
@@ -73,6 +73,8 @@ const App = () => {
   // Estado para indicar si el quiz ha terminado
   const [quizFinished, setQuizFinished] = useState(false);
 
+  const questionRef = useRef(null); 
+
   const handleAnswerClick = (answer) => {
     // Si ya se seleccionó una respuesta o el quiz terminó, no hacer nada
     if (selectedAnswer !== null || quizFinished) {
@@ -104,6 +106,10 @@ const App = () => {
       setCurrentQuestionIndex(nextQuestionIndex); 
       setSelectedAnswer(null); 
       setFeedback(''); 
+      // Hacer scroll al inicio del contenedor de la pregunta
+      setTimeout(() => {
+        questionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100); // pequeño delay para asegurar el render
     } else {
       setQuizFinished(true); 
       setFeedback('¡Quiz Completado!');
@@ -144,7 +150,10 @@ const App = () => {
           }
         `}
       </style>
-      <div className="bg-gradient-to-br from-violet-900 to-purple-800 p-8 rounded-2xl shadow-2xl max-w-xl w-full mx-auto border border-violet-700">
+      <div
+        className="bg-gradient-to-br from-violet-900 to-purple-800 p-8 rounded-2xl shadow-2xl max-w-xl w-full mx-auto border border-violet-700"
+        ref={questionRef}
+      >
         <div className="mb-8 text-center">
           {!quizFinished ? (
             <h1 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-300 to-purple-300 leading-tight mb-4 font-inter">
