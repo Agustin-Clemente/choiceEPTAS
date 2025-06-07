@@ -23,7 +23,7 @@ const App = () => {
       correctAnswer: "Carne poco cocida (especialmente de cordero, cerdo o bovino) con quistes."
     },
     {
-      text: "¿Cómo puede contagiarse la hidatidosis un humanos?",
+      text: "¿Cómo puede contagiarse la hidatidosis en humanos?",
       options: [
         "Por consumo de vísceras de rumiantes con quistes hidatídicos",
         "Por contacto directo con rumiantes infectados.",
